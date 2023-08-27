@@ -29,6 +29,14 @@ app.get('/api/persons', (request, response) => {
     response.json(persons)
 })
 
+// Returns description of the amount of phonebook entries with the current timestamp of the GET request
+app.get('/api/info', (request, response) => {
+    let currentTime = new Date()
+    let content = `<p>The phonebook has info for ${persons.length} people</p><p>${currentTime}</p>`
+
+    response.send(content)
+})
+
 const PORT = 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)

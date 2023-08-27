@@ -22,6 +22,9 @@ Serving application
 
 `npm run dev`
 
+## Exercise 3.1
+This exercise defines the http://localhost:3001/api/info route that displays how many entries are in the phonebook at the time the HTTP GET request was processed.
+
 
 
 
