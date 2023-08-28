@@ -1,8 +1,20 @@
 const express = require('express')
+const morgan = require('morgan')
+
 const app = express()
 
 //Activate JSON parser
 app.use(express.json())
+
+// Create a custom token for recording the request body 
+morgan.token('response', function (req, res) { 
+    return JSON.stringify(req.body)
+})
+
+//Activate the HTTP Requester Morgan middleware instance to monitor all the HTTP requests
+//Tiny format preset which include the following ':method :url :status :res[content-length] - :response-time ms'
+//Refer to the custom 'response' token to display the request body 
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :response'))
 
 let persons = [
     { 
@@ -110,11 +122,15 @@ app.post('/api/persons/', (request,response) => {
     
 })
 
+
+
 // Start Express server
 const PORT = 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
+
+
 
 // Helper function to generate ID for phonebook
 const generateID = () => {

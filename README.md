@@ -36,3 +36,9 @@ This exercise involves creating a HTTP POST Request in this url: http://localhos
 
 ## Exercise 3.6
 This exercise involves creating error handling to ensure that an object sent to the HTTP POST Request does not create a new entry in the phonebook if there's a duplicate name, or the request body is missing data in the required fields.
+
+## Exercise 3.7
+This exercises involves installing the Node.JS middleware called Morgan to log the HTTP requests.
+
+## Exercise 3.8
+This exercise involves using Morgan to log all the HTTP requests. In addition, it should display the request body in JSON object format in the logs. i.e. {"name":"John Smith", "number":"040-2132131231"}
