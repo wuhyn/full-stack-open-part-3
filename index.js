@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 
+//Activate JSON parser
+app.use(express.json())
+
 let persons = [
     { 
       "id": 1,
@@ -50,7 +53,7 @@ app.get('/api/persons/:id', (request, response) => {
     }
 })
 
-// Deletes a specific handbook entry based on the ID
+// Deletes a specific phonebook entry based on the ID
 app.delete('/api/persons/:id', (request, response) => {
     // Convert the id request to a number
     const id = Number(request.params.id)
@@ -62,7 +65,60 @@ app.delete('/api/persons/:id', (request, response) => {
     response.status(204).end()
 })
 
+// Create a new entry in the phonebook
+app.post('/api/persons/', (request,response) => {
+
+    // Assign request body content to variable
+    const body = request.body 
+
+    // Get a list of existing names in the phonebook
+    const listOfNames = persons.map(person => person.name)
+
+    // Error handling for handling the creation of new entries in the phonebook
+    if(!body.name){
+        console.log("The person's name is missing.")
+
+        return response.status(400).json({
+            error: "The person's name is missing."
+        })
+    } else if(!body.number){
+        console.log("The person's phone number is missing.")
+
+        return response.status(400).json({
+            error: "The person's phone number is missing."
+        })
+    } else if(listOfNames.includes(body.name)){
+        console.log("name must be unique.")
+
+        return response.status(400).json({
+            error: 'name must be unique.'
+        })
+    }
+
+    // Create structure of the phonebook 
+    const person = {
+        id: generateID(),
+        name: body.name,
+        number: body.number
+    }
+
+    persons = persons.concat(person)
+
+    // Create the new json response object
+    response.json(person)
+
+    
+})
+
+// Start Express server
 const PORT = 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
+
+// Helper function to generate ID for phonebook
+const generateID = () => {
+    const maxNumber = 10000
+    const randomId = Math.floor(Math.random() * maxNumber)
+    return randomId;
+}
