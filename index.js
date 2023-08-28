@@ -50,6 +50,18 @@ app.get('/api/persons/:id', (request, response) => {
     }
 })
 
+// Deletes a specific handbook entry based on the ID
+app.delete('/api/persons/:id', (request, response) => {
+    // Convert the id request to a number
+    const id = Number(request.params.id)
+
+    // Filter persons array to exclude the ID as part of the Delete request param
+    persons = persons.filter(persons => persons.id !== id)
+
+    //Set a response code with 'no content' and end the request
+    response.status(204).end()
+})
+
 const PORT = 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
