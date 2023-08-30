@@ -3,8 +3,16 @@ const morgan = require('morgan')
 
 const app = express()
 
+const cors = require('cors')
+
 //Activate JSON parser
 app.use(express.json())
+
+//Use CORS to allow communication to the front-end
+app.use(cors())
+
+//Serve static front-end build package
+app.use(express.static('build'))
 
 // Create a custom token for recording the request body 
 morgan.token('response', function (req, res) { 
@@ -125,12 +133,10 @@ app.post('/api/persons/', (request,response) => {
 
 
 // Start Express server
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
-
-
 
 // Helper function to generate ID for phonebook
 const generateID = () => {
