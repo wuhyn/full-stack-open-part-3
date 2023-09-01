@@ -44,6 +44,14 @@ This exercises involves installing the Node.JS middleware called Morgan to log t
 This exercise involves using Morgan to log all the HTTP requests. In addition, it should display the request body in JSON object format in the logs. i.e. {"name":"John Smith", "number":"040-2132131231"}
 
 ## Exercise 3.9
-This exercise involves deploying the backend and front-end code to the internet, specifically using the Fly.io service.
+This exercise involves ensuring the front-end created in [Part 2 of the course](https://github.com/wuhyn/full-stack-open/tree/main/part2/phonebook) works with the back-end code created in this repository., specifically using the Fly.io service.
 
-The application is available [here](https://late-snowflake-6165.fly.dev/index.html)
+## Exercise 3.10
+The backend code of the application has been deployed to Fly.io, the application is available [here.](https://late-snowflake-6165.fly.dev/index.html)
+
+## Exercise 3.11
+This exercise involves generating the production build of the front-end code and attaching it to the Fly.io deployment. The front-end code is stored in the build/ of this repository and is served by using the following line.
+
+```
+app.use(express.static('build'))
+```
